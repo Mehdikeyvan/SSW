@@ -2,7 +2,7 @@ If you want to use these codes I suggest to have an .env file that contains port
 ```
 npm i
 ```
-and after that create a file named .env in the folder that contains server.js file and put the following codes innit.
+and after that create a file named .env in the folder that contains server.js file put the following codes inward .env file.
 ```
 PORT = 3000
 MONGO_URL = "mongodb://127.0.0.1:27017/(collection name)""
