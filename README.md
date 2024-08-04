@@ -7,6 +7,7 @@ and after that create a file named .env in the folder that contains the server.j
 PORT = 3000
 MONGO_URL = "mongodb://127.0.0.1:27017/(collection name)""
 ```
+__Note: make sure to change the collection name to your collection name.__
 so you have the node_modules folder now. then all you need to do is to run the server.js file using __node server__. You can use one of the following aswell
 ```
 npm start (uses node)
