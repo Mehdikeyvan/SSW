@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title><%= title %></title>
+</head>
+<body>
+   <%- include('./partials/header.ejs') %>
+
+   <form id="signUpForm" method="post">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" autocomplete="username" required><br>
+      
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" autocomplete="current-password" required><br>
+
+      <input type="submit" value="Submit">
+   </form>
+   <p id="message"></p>
+   <script>
+      
+      document.getElementById('signUpForm').addEventListener('submit', async function(event){
+         event.preventDefault();
+
+         const username = document.getElementById('username').value;
+         const password = document.getElementById('password').value;
+
+         try {
+            const response = await fetch('/signUp',{
+               method: 'POST',
+               headers: {
+                  'Content-Type': 'application/json'
+               },
+               body: JSON.stringify({ username, password })
+            });
+            const messageElement = document.getElementById('message');
+
+            if(response.ok){
+               messageElement.textContent = "Sign-up was successful."
+               messageElement.style.color = "green";
+            } else {
+               const errorText = await response.text()
+               messageElement.textContent = errorText || 'Sign-up failed';
+               messageElement.style.color = 'red';
+            }
+         }
+         catch(err){
+            const messageElement = document.getElementById('message');
+            messageElement.textContent = 'An error occurred';
+            messageElement.style.color = 'red';
+            console.error('Error:', err);
+         }
+      });
+   </script>
+</body>
+</html>

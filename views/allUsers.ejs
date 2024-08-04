@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title><%= title %></title>
+</head>
+<body>
+   <%- include('./partials/header.ejs') %>
+   
+
+   <div style="border: 2px solid black; padding: 0 2%;">
+      <h1>Users:</h1>
+         <% if(users.length > 0){ %>
+            <% users.forEach(user => { %>
+               <div id="user-<%= user._id %>">
+                  <p style="font-size: larger;margin-bottom: 0;">Username: <%= user.username %></p>
+                  <p style="font-size: medium; margin-top: 2px;">Password: <%= user.password %></p>
+                  <button onclick="deleteUser(event, '<%= user._id %>')">Delete</button>
+                  <hr>
+               </div>
+            <% }) %>
+         <% } else {%>
+            <p>No user in database.</p>
+         <% } %>
+   </div>
+   
+   <script>
+      async function deleteUser(event, userId) {
+         event.preventDefault();
+         try {
+            const response = await fetch(`/deleteUser/${userId}`, {
+               method: 'DELETE'
+            });
+            if (response.ok) {
+               const userDiv = document.getElementById(`user-${userId}`);
+               userDiv.remove();
+            } else {
+               console.error('Failed to delete user');
+            }
+         } catch (error) {
+            console.error('Error:', error);
+         }
+      }
+   </script>
+</body>
+</html>
