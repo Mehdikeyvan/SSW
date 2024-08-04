@@ -7,7 +7,7 @@ and before that make sure to run this command in your terminal
 ```
 npm i
 ```
-so you have the node_modules folder. then all you need to do is to run the server.js file using node. You can use one of the following aswell
+so you have the node_modules folder. then all you need to do is to run the server.js file using **node server**. You can use one of the following aswell
 ```
 npm start (uses node)
 npm run dev (uses nodemon)
